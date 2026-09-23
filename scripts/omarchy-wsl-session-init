@@ -1,0 +1,8 @@
+#!/bin/bash
+set -u
+systemctl --user import-environment $(env | cut -d= -f1) || true
+dbus-update-activation-environment --systemd --all || true
+if ! systemctl --user start wayland-wm-app-daemon.service; then
+  /usr/bin/uwsm aux app-daemon &
+fi
+omarchy-launch-shell || true

@@ -1,0 +1,23 @@
+INFO [26-09-23 18:12:15:08] Applicable build agent found: 'LocalBuild'.
+INFO [26-09-23 18:12:15:13] Working directory: C:\Users\kingd\source\wslg-protocol-bridge
+INFO [26-09-23 18:12:15:17] Project root is: C:\Users\kingd\source\wslg-protocol-bridge\
+INFO [26-09-23 18:12:15:17] DotGit directory is: C:\Users\kingd\source\wslg-protocol-bridge\.git
+INFO [26-09-23 18:12:15:17] Branch from build environment: 
+INFO [26-09-23 18:12:15:20] -< Begin: Loading version variables from disk cache file C:\Users\kingd\source\wslg-protocol-bridge\.git\gitversion_cache\4A211B826899758BF189215916E865A4B0CDC5FA >-
+  INFO [26-09-23 18:12:15:20] Cache file C:\Users\kingd\source\wslg-protocol-bridge\.git\gitversion_cache\4A211B826899758BF189215916E865A4B0CDC5FA not found.
+INFO [26-09-23 18:12:15:20] -< End: Loading version variables from disk cache file C:\Users\kingd\source\wslg-protocol-bridge\.git\gitversion_cache\4A211B826899758BF189215916E865A4B0CDC5FA (Took: 0.80ms) >-
+INFO [26-09-23 18:12:15:21] No configuration file found, using default configuration
+INFO [26-09-23 18:12:15:23] Using latest commit on specified branch
+ERROR [26-09-23 18:12:15:26] An unexpected error occurred:
+GitVersion.GitVersionException: No commits found on the current branch.
+   at GitVersion.GitVersionContextFactory.Create() in /_/src/GitVersion.Core/Core/GitVersionContextFactory.cs:line 26
+   at GitVersion.GitVersionCoreModule.<>c__DisplayClass0_0.<RegisterTypes>b__1() in /_/src/GitVersion.Core/GitVersionCoreModule.cs:line 27
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at GitVersion.VersionCalculation.NextVersionCalculator.get_Context() in /_/src/GitVersion.Core/VersionCalculation/VersionCalculators/NextVersionCalculator.cs:line 26
+   at GitVersion.VersionCalculation.NextVersionCalculator.FindVersion() in /_/src/GitVersion.Core/VersionCalculation/VersionCalculators/NextVersionCalculator.cs:line 30
+   at GitVersion.GitVersionCalculateTool.CalculateVersionVariables() in /_/src/GitVersion.Core/Core/GitVersionCalculateTool.cs:line 47
+   at GitVersion.GitVersionExecutor.RunGitVersionTool(GitVersionOptions gitVersionOptions) in /_/src/GitVersion.App/GitVersionExecutor.cs:line 66
+INFO [26-09-23 18:12:15:26] Please run `git log --graph --format="%h %cr %d" --decorate --date=relative --all --remotes=*` to see the git graph. This can help you troubleshoot any issues.
+

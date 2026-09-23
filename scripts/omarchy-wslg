@@ -1,0 +1,29 @@
+#!/bin/bash
+set -eu
+if [ -f /etc/omarchy.conf ]; then
+  # shellcheck disable=SC1091
+  . /etc/omarchy.conf
+fi
+export OMARCHY_PATH="${OMARCHY_PATH:-$HOME/.local/share/omarchy}"
+if [ -f "$OMARCHY_PATH/default/bash/env-bootstrap" ]; then
+  # shellcheck disable=SC1091
+  . "$OMARCHY_PATH/default/bash/env-bootstrap"
+fi
+export PATH="$HOME/.local/bin:${PATH:-}"
+if [ -z "${WAYLAND_DISPLAY:-}" ]; then
+  echo "WAYLAND_DISPLAY is unset" >&2
+  exit 2
+fi
+args=(--config "$HOME/.config/hypr/hyprland-wsl.lua")
+for arg in "$@"; do
+  if [ "$arg" = "--fullscreen" ]; then
+    args=(--fullscreen "${args[@]}")
+  fi
+done
+if [ "${OMARCHY_WSLG_FULLSCREEN:-}" = "1" ]; then
+  case " ${args[*]} " in
+    *" --fullscreen "*) ;;
+    *) args=(--fullscreen "${args[@]}") ;;
+  esac
+fi
+exec "$HOME/.local/bin/wslg-bridge" "${args[@]}"

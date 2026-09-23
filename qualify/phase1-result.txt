@@ -1,0 +1,42 @@
+Phase 1 qualification, 2026-09-23
+
+Kernel: 6.18.40.1-microsoft-standard-WSL2-omarchy-vkms1+
+Source: microsoft/WSL2-Linux-Kernel tag linux-msft-wsl-6.18.40.1
+Commit: 14794180686c2fb6307fbe359c359bec765249f3
+vmlinux SHA-256: 7F282FDAC60A390692B94B35DEC458C33B9A206E8BE225C4ADFAEE3134F7D91E
+modules.vhdx SHA-256: CCCEB830A6D7889FE072A44613CD6D45B11BCF9AAD2100EF1EE5D49A70AB3F5B
+
+.config in use:
+[wsl2]
+kernel=C:\\Users\\kingd\\source\\wsl-kernel\\vmlinux
+
+kernelModules is not set. Pointing kernelModules at modules.vhdx makes WSL 2.9.12
+fail with CreateInstance/CreateVm/ConfigureNetworking/E_UNEXPECTED. The kernel
+alone boots. VKMS is built in, so the probe does not need the modules image.
+There was no previous .wslconfig. Rollback is deleting C:\Users\kingd\.wslconfig
+and running wsl --shutdown.
+
+Probe command, as user omarchy, after usermod -aG video omarchy:
+  /home/omarchy/src/wslg-build/qualify-drm
+
+Output:
+  no render node, using primary
+  vkms primary /dev/dri/card0 rdev 226:0
+  selected node /dev/dri/card0
+  PRIME caps 0x3
+  reopen /dev/dri/card0 -> 4
+  format 875713112 stride 256 offset 0 modifier 0x0 fd 7
+  PASS readback format 875713112 stride 256
+  PASS format 875713112
+  format 875713089 stride 256 offset 0 modifier 0x0 fd 7
+  PASS readback format 875713089 stride 256
+  PASS format 875713089
+  PASS qualification
+
+875713112 is DRM_FORMAT_XRGB8888. 875713089 is DRM_FORMAT_ARGB8888.
+XRGB byte 3 is not compared. The driver does not store the shader alpha there.
+
+Other distros on this kernel: Pengwin, Ubuntu-24.04, Omarchy, and docker-desktop
+all reported the same uname. Pengwin resolved example.com and saw /mnt/c.
+Pengwin and Ubuntu both had WAYLAND_DISPLAY=wayland-0. Pengwin prints
+"modprobe: Module vgem not found" at startup because that module is not built.
