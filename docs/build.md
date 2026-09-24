@@ -1,11 +1,13 @@
 # Build and test
 
-Build on ext4 inside `Omarchy-Desktop`. The source tree can stay on the Windows drive. This machine uses `/home/omarchy/src/wslg-build` as the Meson build directory and `/mnt/c/Users/kingd/source/wslg-protocol-bridge` as the source.
+User install steps are in `docs/install.md`. This page is the build itself.
+
+Build on ext4 inside `Omarchy-Desktop`, as user `omarchy`. The source tree can stay on the Windows drive. This machine uses `/home/omarchy/src/wslg-build` as the Meson build directory. A clone at `~/src/wslg-protocol-bridge` is the preferred source. The Windows checkout is `/mnt/c/Users/kingd/source/wslg-protocol-bridge`.
 
 Packages already present in the desktop image: gcc, meson, ninja, wayland, wayland-protocols, libdrm, Mesa GBM, EGL, and GLES. Do not run `pacman -Syu`.
 
 ```bash
-scripts/build-and-test.sh
+bash scripts/build-and-test.sh
 ```
 
 That configures the build directory if needed, runs `ninja`, then `bridge-suite` and `qualify-drm`.
@@ -22,7 +24,7 @@ chmod 660 /dev/dri/card0
 ## Install
 
 ```bash
-scripts/install-into-distro.sh
+bash scripts/install-into-distro.sh
 ```
 
-This copies `wslg-bridge`, `omarchy-wslg`, `omarchy-wsl-session-init`, and `hyprland-wsl.lua` into the omarchy user's config and `~/.local/bin`.
+Run that as `omarchy`, not root. It copies `wslg-bridge`, `omarchy-wslg`, `omarchy-wsl-session-init`, and `hyprland-wsl.lua` into that user's `~/.local/bin` and `~/.config/hypr`. From Windows, use the full launcher path in `docs/usage.md`. A non-interactive `wsl.exe` command does not search `~/.local/bin`.

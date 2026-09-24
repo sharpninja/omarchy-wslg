@@ -26,4 +26,4 @@ uname -r
 ls -l /dev/dri/card0
 ```
 
-Pengwin, Ubuntu-24.04, the CLI distro `Omarchy`, `Omarchy-Desktop`, and `docker-desktop` must all boot. Docker must still run a container with a network and a bind mount. Another distro must still open a WSLg window.
+Pengwin, Ubuntu-24.04, the CLI distro `Omarchy`, `Omarchy-Desktop`, and docker-desktop must still boot after the kernel line is in place. Confirm each with `wsl.exe -d <name> -- uname -r`.

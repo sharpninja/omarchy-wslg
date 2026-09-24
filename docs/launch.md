@@ -1,5 +1,7 @@
 # Launch
 
+Daily commands and failure fixes are in `docs/usage.md`. Install is in `docs/install.md`.
+
 `omarchy-wslg` is the only supported way to start the desktop.
 
 ```bash
